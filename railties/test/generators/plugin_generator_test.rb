@@ -258,6 +258,7 @@ class PluginGeneratorTest < Rails::Generators::TestCase
   def test_creating_engine_with_hyphenated_name_in_full_mode
     run_generator [File.join(destination_root, "hyphenated-name"), "--full"]
     assert_no_file "hyphenated-name/app/assets/javascripts/hyphenated/name"
+    assert_no_file "hyphenated-name/test/dummy/app/javascript"
     assert_file "hyphenated-name/app/assets/stylesheets/hyphenated/name"
     assert_file "hyphenated-name/app/assets/images/hyphenated/name"
     assert_file "hyphenated-name/app/models"
@@ -296,6 +297,7 @@ class PluginGeneratorTest < Rails::Generators::TestCase
   def test_create_mountable_application_with_mountable_option
     run_generator [destination_root, "--mountable"]
     assert_no_file "app/assets/javascripts/bukkits"
+    assert_no_file "test/dummy/app/javascript/packs/application.js"
     assert_file "app/assets/stylesheets/bukkits"
     assert_file "app/assets/images/bukkits"
     assert_file "config/routes.rb", /Bukkits::Engine\.routes\.draw do/
@@ -326,6 +328,7 @@ class PluginGeneratorTest < Rails::Generators::TestCase
   def test_create_mountable_application_with_mountable_option_and_hypenated_name
     run_generator [File.join(destination_root, "hyphenated-name"), "--mountable"]
     assert_no_file "hyphenated-name/app/assets/javascripts/hyphenated/name"
+    assert_no_file "hyphenated-name/test/dummy/app/javascript/packs/application.js"
     assert_file "hyphenated-name/app/assets/stylesheets/hyphenated/name"
     assert_file "hyphenated-name/app/assets/images/hyphenated/name"
     assert_file "hyphenated-name/config/routes.rb",                                          /Hyphenated::Name::Engine\.routes\.draw do/
